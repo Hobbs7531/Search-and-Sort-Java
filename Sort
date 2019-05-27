@@ -1,0 +1,58 @@
+  ***FIND INFORMATION***
+
+  //Function to find and get the name found
+    public static String getName (String nameToFind) throws IOException {
+      BufferedReader input = new BufferedReader(new FileReader("Scientists.txt"));
+      int lines = flexableArray();//calls function to get number of lines
+      //declare and create 3 arrays 
+      String names[], birthday[], info = "";
+      int iqLevel[];
+
+      names = new String [lines];
+      iqLevel = new int [lines];
+      birthday = new String [lines];
+
+      //load the information into the arrays
+      for(int i = 0; i < names.length; i++) {
+
+        //Read from file for names, IQ Levels and birthdays of scientists
+        names[i] = input.readLine();
+        iqLevel[i] = Integer.parseInt(input.readLine());
+        birthday[i] = input.readLine();
+      }
+
+      int loc = findName(names,nameToFind);
+
+      //display the information of the scientists
+      if(loc >= 0) info = names[loc] + " has an IQ of " + iqLevel[loc] + "\nAnd was born on " + birthday[loc];
+      else info = nameToFind + " not found!";
+      input.close();
+      return info;
+    }
+
+
+    //prompt user for a name to find
+        String nameToFind = JOptionPane.showInputDialog(null, "Enter a Scientists name to find");
+
+        //Call function to find the name and display if found or not
+        String info = getName(nameToFind);
+        JOptionPane.showMessageDialog(null, info);
+        -------------------------------------------------------------------------------------------------------------------
+   ***REARANGE ALPHABETICAL ORDER***
+
+         //Re-arrange the list to alphebetical order
+        for (int i = 0; i < names.length; i++) 
+        {
+          for (int j = i + 1; j < names.length; j++) 
+          {
+            if (names[i].compareTo(names[j])>0) 
+            {
+              String tempName = names[i];
+              names[i] = names[j];
+              names[j] = tempName;
+              int tempIQ = iqLevels[i];
+              iqLevels [i] = iqLevels [j];
+              iqLevels [j] = tempIQ;
+            }
+          }
+        }
